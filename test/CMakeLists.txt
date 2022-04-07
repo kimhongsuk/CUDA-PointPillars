@@ -16,6 +16,7 @@
 cmake_minimum_required(VERSION 2.8.7)
 set(PROJECT_NAME demo)
 find_package(CUDA REQUIRED)
+find_package(PCL 1.8 REQUIRED)
 
 if(${CMAKE_HOST_SYSTEM_PROCESSOR} STREQUAL  "aarch64")
   set(CMAKE_C_COMPILER /usr/bin/aarch64-linux-gnu-gcc)
@@ -86,3 +87,20 @@ target_link_libraries(${PROJECT_NAME}
     libnvinfer.so
     libnvonnxparser.so
 )
+
+if( PCL_FOUND )
+  # [C/C++]>[General]>[Additional Include Directories]
+  include_directories( ${PCL_INCLUDE_DIRS} )
+
+  # [C/C++]>[Preprocessor]>[Preprocessor Definitions]
+  add_definitions( ${PCL_DEFINITIONS} )
+  
+  # For Use Not PreCompiled Features 
+  #add_definitions( -DPCL_NO_PRECOMPILE )
+
+  # [Linker]>[General]>[Additional Library Directories]
+  link_directories( ${PCL_LIBRARY_DIRS} )
+
+  # [Linker]>[Input]>[Additional Dependencies]
+  target_link_libraries( ${PROJECT_NAME} ${PCL_LIBRARIES} )
+endif()
