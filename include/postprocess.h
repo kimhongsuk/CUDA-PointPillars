@@ -18,6 +18,8 @@
 #define POSTPROCESS_H_
 
 #include <vector>
+#include <cuda_runtime_api.h>
+
 #include "params.h"
 /*
 box_encodings: (B, N, 7 + C) or (N, 7 + C) [x, y, z, dx, dy, dz, heading or *[cos, sin], ...]

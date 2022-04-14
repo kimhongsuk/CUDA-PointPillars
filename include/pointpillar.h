@@ -22,8 +22,8 @@
 #include "NvOnnxParser.h"
 #include "NvInferRuntime.h"
 
-#include "postprocess.h"
 #include "preprocess.h"
+#include "pointcloud_vlp16.h"
 
 #define GENERATE_VOXELS_BY_CPU 0
 #define PERFORMANCE_LOG 1
